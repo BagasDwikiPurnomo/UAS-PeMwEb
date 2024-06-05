@@ -1,0 +1,12 @@
+{
+  "players": [
+    {
+      "id": 1,
+      "firstname": "Bagas",
+      "lastname": "Dwiki Purnomo",
+      "jurusan": "Rpl",
+      "kelas": "11"
+      
+    }
+  ]
+}

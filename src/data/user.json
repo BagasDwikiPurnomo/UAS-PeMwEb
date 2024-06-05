@@ -1,0 +1,30 @@
+  {
+      "users": [
+        {
+          "username": "Admin",
+          "password": "admin123",
+          "role": "Admin"
+        },
+        {
+          "username": "Gudang",
+          "password": "gudang123",
+          "role": "Gudang"
+        },
+        {
+          "username": "Konsumen",
+          "password": "konsumen123",
+          "role": "Konsumen"
+        },
+        {
+          "username": "Kasir",
+          "password": "kasir123",
+          "role": "Kasir"
+        },
+        {
+          "username": "Supplier",
+          "password": "supplier123",
+          "role": "Supplier"
+        }
+      ]
+    }
+    

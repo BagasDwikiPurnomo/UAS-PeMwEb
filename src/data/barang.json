@@ -1,0 +1,18 @@
+{
+  "barang": [
+    {
+      "id": 1,
+      "nama": "Barang A",
+      "jumlah": 50,
+      "harga": 10000,
+      "kategori": "Kategori 1"
+    },
+    {
+      "id": 2,
+      "nama": "Barang B",
+      "jumlah": 30,
+      "harga": 20000,
+      "kategori": "Kategori 2"
+    }
+  ]
+}
