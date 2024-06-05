@@ -5,7 +5,7 @@ import GudangPage from "./GudangPage";
 import SupplierPage from './SupplierPage';
 import CashierPage from './KasirPage';
 
-const AdminPage = ({ requests, users, setUsers, gudangData, purchases, addPurchase, setGudangData, onUpdateRequest, onDeleteRequest, acceptPurchase, declinePurchase, handleRequest}) => {
+const AdminPage = ({ requests, users, setUsers, gudangData, purchases, addPurchase, setGudangData, onUpdateRequest, onDeleteRequest, acceptPurchase, declinePurchase, handleRequest, onAccept, onDecline, onRequest}) => {
   const [newUser, setNewUser] = useState({
     username: '',
     password: '',
@@ -131,6 +131,7 @@ const AdminPage = ({ requests, users, setUsers, gudangData, purchases, addPurcha
       )}
       {activeComponent === 'Kasir' && (
       <CashierPage
+    
       requests={requests}
       onUpdateRequest={onUpdateRequest}
       onDeleteRequest={onDeleteRequest}
