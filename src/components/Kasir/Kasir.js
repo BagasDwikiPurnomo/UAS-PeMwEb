@@ -86,6 +86,7 @@ const CashierPage = ({ purchases, onAccept, onDecline, gudangData, setGudangData
     });
     setBarangList(updatedBarangList);
     setGudangData(updatedBarangList); // Update data gudang setelah pembelian diterima
+    // eslint-disable-next-line
   }, [purchases]);
 
   return (
