@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import AcceptPurchaseForm from './AcceptPurchase';
+import AcceptPurchaseForm from '../Kasir/AcceptPurchase';
 import data from "../../data/barang.json";
 import { formatRupiah } from '../FormatHarga';
 
@@ -7,8 +7,8 @@ const CashierPage = ({ purchases, onAccept, onDecline, gudangData, setGudangData
   const [selectedPurchase, setSelectedPurchase] = useState(null);
   const [barangList, setBarangList] = useState([]);
   const [requestedItems, setRequestedItems] = useState([]);
-  const [successMessages, setSuccessMessages] = useState([]); 
-  const [declineMessages, setDeclineMessages] = useState([]); 
+  const [successMessages, setSuccessMessages] = useState([]);
+  const [declineMessages, setDeclineMessages] = useState([]);
 
   const successTimeoutRef = useRef(null); // Ref untuk timeout pesan sukses
   const declineTimeoutRef = useRef(null); // Ref untuk timeout pesan decline
@@ -72,6 +72,21 @@ const CashierPage = ({ purchases, onAccept, onDecline, gudangData, setGudangData
     }
   };
 
+  // Update stok barang di gudang setelah pembelian diterima
+  useEffect(() => {
+    const updatedBarangList = barangList.map(barang => {
+      const requestedItem = purchases.find(purchase => purchase.namaBarang === barang.nama);
+      if (requestedItem && requestedItem.status === 'Validated') {
+        return {
+          ...barang,
+          jumlah: barang.jumlah - requestedItem.quantity
+        };
+      }
+      return barang;
+    });
+    setBarangList(updatedBarangList);
+    setGudangData(updatedBarangList); // Update data gudang setelah pembelian diterima
+  }, [purchases]);
 
   return (
     <div className="p-6 bg-white shadow-md rounded-lg">
@@ -133,18 +148,14 @@ const CashierPage = ({ purchases, onAccept, onDecline, gudangData, setGudangData
                       Accept
                     </button>
                     {/* Tampilkan tombol Unvalidate jika status sudah "Validated" */}
-              
-                      <button
-                        onClick={() => handleUnvalidate(purchase)}
-                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 mr-2"
-                      >
-                        Unvalidate
-                      </button>
-                  
+                    <button
+                      onClick={() => handleUnvalidate(purchase)}
+                      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 mr-2"
+                    >
+                      Unvalidate
+                    </button>
                   </>
-                ) : null}
-                {/* Tampilkan tombol Request jika stok tidak cukup */}
-                {!checkStock(purchase.namaBarang, purchase.quantity) && (
+                ) : (
                   <button
                     onClick={() => handleRequest(purchase)}
                     className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mr-2"
